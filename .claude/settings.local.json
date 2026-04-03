@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:github.com)",
+      "Bash(python3 .agents/skills/ui-ux-pro-max/scripts/search.py \"AI automation agency SaaS dark professional\" --design-system -p \"DigitalStrides\")",
+      "Bash(python3 .agents/skills/ui-ux-pro-max/scripts/search.py \"dark mode AI tech agency landing page hero CTA\" --domain landing)",
+      "Bash(python3 .agents/skills/ui-ux-pro-max/scripts/search.py \"dark SaaS tech professional deep dark\" --domain color)",
+      "Bash(python3 .agents/skills/ui-ux-pro-max/scripts/search.py \"agency SaaS modern tech\" --domain style)",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(python3 .agents/skills/ui-ux-pro-max/scripts/search.py \"cyberpunk terminal AI dark monospace futuristic\" --design-system -p \"DigitalStrides-v2\")",
+      "Bash(pkill -f \"next dev\")",
+      "Bash(curl -s \"http://localhost:3000/_next/static/css/app/layout.css?v=1774713717117\")",
+      "Bash(pkill -f 'next dev')",
+      "Bash(for f:*)",
+      "Bash(do)",
+      "Bash(perl -i -p -e 's/#00D9FF/#FFCC00/g;' -e 's/#00FF87/#FFCC00/g;' -e 's/0,217,255/255,204,0/g;' -e 's/0,255,135/255,204,0/g;' -e 's/#08080D/#111614/g;' -e 's/#0F0F1A/#2a3230/g;' \"$f\")",
+      "Bash(echo \"✓ $f\")",
+      "Bash(done)"
+    ]
+  }
+}
