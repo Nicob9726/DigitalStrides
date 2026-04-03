@@ -16,7 +16,10 @@
       "Bash(do)",
       "Bash(perl -i -p -e 's/#00D9FF/#FFCC00/g;' -e 's/#00FF87/#FFCC00/g;' -e 's/0,217,255/255,204,0/g;' -e 's/0,255,135/255,204,0/g;' -e 's/#08080D/#111614/g;' -e 's/#0F0F1A/#2a3230/g;' \"$f\")",
       "Bash(echo \"✓ $f\")",
-      "Bash(done)"
+      "Bash(done)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ]
   }
 }

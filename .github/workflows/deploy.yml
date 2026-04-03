@@ -16,9 +16,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_SSH_KEY }}
           script: |
-            cd /var/www/digitalstrides
+            cd /home/midwifeqm/digitalstrides
             git pull origin main
-            npm install --production=false
-            npm run build
-            pm2 restart digitalstrides || pm2 start npm --name "digitalstrides" -- start
-            pm2 save
+            docker compose build --no-cache
+            docker compose up -d
