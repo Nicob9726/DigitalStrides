@@ -18,5 +18,7 @@ jobs:
           script: |
             cd /home/hebammenqm/digitalstrides
             git pull origin main
+            echo "SMTP_USER=${{ secrets.SMTP_USER }}" > .env
+            echo "SMTP_PASS=${{ secrets.SMTP_PASS }}" >> .env
             docker compose build --no-cache
             docker compose up -d
