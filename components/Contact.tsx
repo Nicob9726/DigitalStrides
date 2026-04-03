@@ -18,7 +18,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>
 
 const contactInfo = [
-  { id: 'C_01', icon: Mail, label: 'E-MAIL', value: 'hallo@digitalstrides.de', href: 'mailto:hallo@digitalstrides.de', accent: '#FFCC00' },
+  { id: 'C_01', icon: Mail, label: 'E-MAIL', value: 'nico.becker@digitalstrides.de', href: 'mailto:nico.becker@digitalstrides.de', accent: '#FFCC00' },
   { id: 'C_02', icon: Calendar, label: 'ERSTGESPRÄCH', value: 'Kostenloses 30-Min-Call', href: '#kontakt', accent: '#FFCC00' },
   { id: 'C_03', icon: MessageSquare, label: 'ANTWORTZEIT', value: 'Innerhalb von 24 Stunden', href: undefined, accent: '#FFCC00' },
 ]
@@ -33,8 +33,12 @@ export default function Contact() {
 
   const onSubmit = async (data: FormData) => {
     try {
-      await new Promise((res) => setTimeout(res, 1200))
-      console.log('Form data:', data)
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+      if (!res.ok) throw new Error()
       setSubmitted(true)
       reset()
     } catch {
