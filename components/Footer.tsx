@@ -13,7 +13,7 @@ const footerLinks = {
   UNTERNEHMEN: [
     { label: 'Prozess', href: '#prozess' },
     { label: 'Case Studies', href: '#referenzen' },
-    { label: 'Preise', href: '#preise' },
+    { label: 'Wähle deinen Start', href: '#preise' },
     { label: 'FAQ', href: '#faq' },
   ],
   LEGAL: [
