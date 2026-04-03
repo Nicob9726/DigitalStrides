@@ -52,13 +52,13 @@ export const metadata: Metadata = {
     siteName: 'DigitalStrides',
     title: 'DigitalStrides – KI-Automatisierung für Unternehmen',
     description: 'Wir automatisieren Ihre Geschäftsprozesse mit modernster KI-Technologie.',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'DigitalStrides' }],
+    images: [{ url: '/opengraph-image', width: 1200, height: 630, alt: 'DigitalStrides – KI-Automatisierung für Selbstständige & KMUs' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'DigitalStrides – KI-Automatisierung',
     description: 'Wir automatisieren Ihre Geschäftsprozesse mit modernster KI-Technologie.',
-    images: ['/og-image.png'],
+    images: ['/opengraph-image'],
   },
   alternates: { canonical: 'https://www.digitalstrides.de' },
 }
@@ -75,7 +75,7 @@ const jsonLd = {
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        email: 'hallo@digitalstrides.de',
+        email: 'nico.becker@digitalstrides.de',
         availableLanguage: ['German'],
       },
     },
