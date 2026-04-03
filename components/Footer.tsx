@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { Terminal, Linkedin, Instagram, Twitter, Github } from 'lucide-react'
+import { Terminal, Linkedin } from 'lucide-react'
 
 const footerLinks = {
   SERVICES: [
@@ -19,16 +19,12 @@ const footerLinks = {
   LEGAL: [
     { label: 'Impressum', href: '/impressum' },
     { label: 'Datenschutz', href: '/datenschutz' },
-    { label: 'AGB', href: '/agb' },
     { label: 'Kontakt', href: '#kontakt' },
   ],
 }
 
 const socialLinks = [
-  { icon: Linkedin, href: 'https://www.linkedin.com/company/digitalstrides', label: 'LinkedIn' },
-  { icon: Instagram, href: 'https://www.instagram.com/digitalstrides', label: 'Instagram' },
-  { icon: Twitter, href: 'https://twitter.com/digitalstrides', label: 'Twitter/X' },
-  { icon: Github, href: 'https://github.com/digitalstrides', label: 'GitHub' },
+  { icon: Linkedin, href: 'https://www.linkedin.com/in/digitalstrides', label: 'LinkedIn' },
 ]
 
 export default function Footer() {
