@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bookly AI — Demo | KI-gestützte Online Buchung</title>
+<meta name="description" content="Erlebe Bookly AI in Aktion: KI gestützte Online Buchung für lokale Dienstleister. Interaktive Demo.">
+<meta property="og:title" content="Bookly AI — Jetzt Demo testen">
+<meta property="og:description" content="KI gestützte Online Buchung für Massage Studios, Friseursalons & mehr. Interaktive Demo.">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+::-webkit-scrollbar{width:4px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:#c4bda8;border-radius:4px}
+body{font-family:'Outfit',sans-serif;background:#f7f5f0;color:#2d2a24;min-height:100vh;overflow-x:hidden}
+@keyframes slideUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.05)}}
+@keyframes dotBounce{0%,80%,100%{transform:translateY(0)}40%{transform:translateY(-6px)}}
+@keyframes chatPop{from{opacity:0;transform:scale(.85) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+
+/* NAV */
+.sn{display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem;border-bottom:1px solid #e8e3d9}
+.sb{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:600;color:#3d5940}
+.sl{display:flex;gap:2rem;font-size:.85rem;color:#6b6560}
+.sl span{cursor:pointer;transition:color .2s}.sl span:hover{color:#3d5940}
+
+/* HERO */
+.hero{padding:6rem 2rem 5rem;text-align:center;position:relative;background:linear-gradient(180deg,#f7f5f0,#eee9df)}
+.hg{position:absolute;top:10%;left:50%;transform:translateX(-50%);width:400px;height:400px;border-radius:50%;opacity:.08;background:radial-gradient(circle,#5b7a5e,transparent 70%);pointer-events:none}
+.ht{font-size:.72rem;letter-spacing:.3em;text-transform:uppercase;color:#5b7a5e;margin-bottom:1.5rem;font-weight:500}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(2.2rem,5vw,3.8rem);font-weight:400;line-height:1.2;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:#5b7a5e}
+.hero p{color:#8a847a;font-size:1.05rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.7;font-weight:300}
+.hb{background:linear-gradient(135deg,#5b7a5e,#3d5940);color:#fff;border:none;padding:1rem 2.5rem;border-radius:50px;font-size:.95rem;font-family:'Outfit';font-weight:500;cursor:pointer;box-shadow:0 4px 20px rgba(61,89,64,.3);transition:all .3s}
+.hb:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(61,89,64,.4)}
+
+/* SERVICES */
+.ss{padding:3rem 2rem;max-width:900px;margin:0 auto}
+.ss h2{font-family:'Playfair Display',serif;font-size:1.6rem;text-align:center;margin-bottom:2rem;font-weight:400}
+.sg{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:1rem}
+.sc{background:#fff;border-radius:16px;padding:1.5rem;border:1px solid #e8e3d9;transition:all .3s}
+.sc:hover{border-color:#5b7a5e;transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+
+/* CONTACT/FOOTER */
+.ct{padding:2rem;text-align:center;color:#6b6560;font-size:.85rem;line-height:2}
+.ct h2{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:400;margin-bottom:1rem}
+.ft{text-align:center;padding:1.5rem;border-top:1px solid #e8e3d9;font-size:.75rem;color:#a09a90}
+
+/* CHAT BUBBLE */
+.cb{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;background:linear-gradient(135deg,#5b7a5e,#3d5940);border:none;cursor:pointer;box-shadow:0 6px 24px rgba(61,89,64,.4);display:flex;align-items:center;justify-content:center;animation:pulse 2.5s ease-in-out infinite;z-index:1000;transition:transform .2s}
+.cb:hover{transform:scale(1.1)}
+.cb .bd{position:absolute;top:-2px;right:-2px;width:18px;height:18px;border-radius:50%;background:#e8845a;border:2px solid #f7f5f0;font-size:.6rem;color:#fff;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* CHAT WINDOW */
+.cw{position:fixed;bottom:24px;right:24px;width:400px;max-width:calc(100vw - 32px);height:min(680px,calc(100vh - 48px));border-radius:24px;background:#faf8f4;box-shadow:0 12px 60px rgba(0,0,0,.18),0 2px 8px rgba(0,0,0,.08);display:none;flex-direction:column;overflow:hidden;z-index:1001;animation:chatPop .35s ease-out;border:1px solid #e8e3d9}
+.ch{padding:1rem 1.2rem;display:flex;align-items:center;gap:12px;background:linear-gradient(135deg,#5b7a5e,#3d5940);flex-shrink:0}
+.ca{width:42px;height:42px;border-radius:50%;background:rgba(255,255,255,.2);display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.ci{flex:1}.cn{color:#fff;font-weight:600;font-size:.95rem}
+.cs{color:rgba(255,255,255,.75);font-size:.72rem;display:flex;align-items:center;gap:5px}
+.cd{width:6px;height:6px;border-radius:50%;background:#7ddf7d}
+.cx{background:rgba(255,255,255,.15);border:none;border-radius:50%;width:32px;height:32px;cursor:pointer;color:#fff;font-size:1.1rem;display:flex;align-items:center;justify-content:center;transition:background .2s}
+.cx:hover{background:rgba(255,255,255,.3)}
+.cbd{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:8px}
+
+/* Messages */
+.m{max-width:85%;animation:slideUp .3s ease-out}
+.mb{align-self:flex-start}.mu{align-self:flex-end}
+.mx{padding:.7rem 1rem;border-radius:18px;font-size:.85rem;line-height:1.6;white-space:pre-line}
+.mb .mx{background:#fff;color:#2d2a24;border-bottom-left-radius:4px;box-shadow:0 1px 4px rgba(0,0,0,.06);border:1px solid #ebe7de}
+.mu .mx{background:linear-gradient(135deg,#5b7a5e,#3d5940);color:#fff;border-bottom-right-radius:4px}
+.mt{font-size:.58rem;color:#a09a90;margin-top:3px;padding:0 6px}
+.mb .mt{text-align:left}.mu .mt{text-align:right}
+
+/* Typing */
+.tp{align-self:flex-start;background:#fff;border:1px solid #ebe7de;border-radius:18px;border-bottom-left-radius:4px;padding:.7rem 1rem;display:flex;gap:5px;animation:slideUp .3s ease-out}
+.td{width:7px;height:7px;border-radius:50%;background:#c4bda8;animation:dotBounce 1.2s ease-in-out infinite}
+.td:nth-child(2){animation-delay:.15s}.td:nth-child(3){animation-delay:.3s}
+
+/* Actions */
+.ac{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px;animation:slideUp .3s ease-out}
+.pl{border-radius:20px;padding:.55rem 1rem;cursor:pointer;font-size:.82rem;font-weight:500;transition:all .2s;font-family:'Outfit';border:none}
+.pp{background:linear-gradient(135deg,#5b7a5e,#3d5940);color:#fff;box-shadow:0 2px 8px rgba(61,89,64,.2)}
+.pp:hover{background:linear-gradient(135deg,#6d8f70,#4a6b4d)}
+.ps{background:#fff;color:#2d2a24;border:1px solid #e0dbd2!important}
+.ps:hover{background:#f0ece4;border-color:#5b7a5e!important}
+.pm{padding:.4rem .8rem;font-size:.75rem}
+
+/* Service cards */
+.sv{background:#faf8f4;border:1px solid #e8e3d9;border-radius:14px;padding:.8rem 1rem;cursor:pointer;text-align:left;transition:all .2s;display:flex;justify-content:space-between;align-items:center;font-family:'Outfit'}
+.sv:hover{background:#fff;border-color:#5b7a5e;box-shadow:0 4px 12px rgba(61,89,64,.1);transform:translateX(2px)}
+.sv .vl{display:flex;gap:10px;align-items:center}
+.sv .ve{font-size:1.3rem}
+.sv .vn{color:#2d2a24;font-size:.85rem;font-weight:500}
+.sv .vd{color:#a09a90;font-size:.72rem}
+.sv .vp{color:#5b7a5e;font-weight:600;font-size:.95rem;flex-shrink:0}
+
+/* Slots */
+.dl{font-size:.7rem;font-weight:600;color:#5b7a5e;margin-bottom:6px;text-transform:uppercase;letter-spacing:.08em}
+.sr{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.sb2{background:#fff;border:1px solid #e0dbd2;border-radius:10px;padding:.45rem .85rem;cursor:pointer;font-size:.82rem;font-weight:500;transition:all .2s;font-family:'Outfit';color:#2d2a24}
+.sb2:hover{background:#5b7a5e;color:#fff;border-color:#5b7a5e}
+
+/* Input */
+.ib{padding:.7rem 1rem;border-top:1px solid #ebe7de;display:none;gap:8px;background:#fff;flex-shrink:0}
+.ii{flex:1;background:#f7f5f0;border:1px solid #e8e3d9;border-radius:12px;padding:.7rem 1rem;color:#2d2a24;font-size:.85rem;outline:none;font-family:'Outfit';transition:border-color .2s}
+.ii:focus{border-color:#5b7a5e}.ii::placeholder{color:#b5b0a5}
+.is{background:linear-gradient(135deg,#5b7a5e,#3d5940);border:none;border-radius:12px;width:42px;cursor:pointer;color:#fff;font-size:1rem;display:flex;align-items:center;justify-content:center}
+.pw{text-align:center;padding:.5rem;font-size:.6rem;color:#bbb5a8;border-top:1px solid #ebe7de;background:#fff;flex-shrink:0}
+
+/* JOURNEY */
+.jo{position:fixed;inset:0;background:rgba(0,0,0,.6);backdrop-filter:blur(4px);display:none;align-items:center;justify-content:center;z-index:2000;animation:fadeIn .3s ease-out;padding:16px}
+.jb{background:#faf8f4;border-radius:24px;width:100%;max-width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 80px rgba(0,0,0,.3)}
+.jh{padding:1.5rem 1.5rem 0;display:flex;justify-content:space-between;align-items:flex-start}
+.jt{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:#5b7a5e;margin-bottom:6px;font-weight:600}
+.jti{font-family:'Playfair Display',serif;font-size:1.4rem;color:#2d2a24;font-weight:400;margin:0}
+.jx{background:#ebe7de;border:none;border-radius:50%;width:36px;height:36px;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;color:#6b6560}
+.js{margin-bottom:1rem;transition:all .6s ease-out}
+.js.off{opacity:.25;transform:translateY(8px)}.js.on{opacity:1;transform:translateY(0)}
+.jr{display:flex;gap:14px;align-items:flex-start}
+.jdc{display:flex;flex-direction:column;align-items:center;flex-shrink:0}
+.jd{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:all .4s}
+.jd.on{background:linear-gradient(135deg,#5b7a5e,#3d5940);box-shadow:0 4px 12px rgba(61,89,64,.3)}.jd.off{background:#ebe7de}
+.jl{width:2px;height:20px;margin:4px 0;transition:background .4s}.jl.on{background:#5b7a5e}.jl.off{background:#e0dbd2}
+.jc{flex:1;padding-top:2px}
+.jch{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.jcti{font-weight:600;font-size:.88rem;color:#2d2a24}
+.jcc{font-size:.65rem;color:#5b7a5e;font-weight:500;background:rgba(91,122,94,.1);padding:2px 8px;border-radius:10px}
+.jtm{font-size:.7rem;color:#a09a90;margin-bottom:8px}
+.jp{background:#fff;border:1px solid #ebe7de;border-radius:14px;padding:.9rem 1rem;font-size:.78rem;line-height:1.6;color:#4a463f;white-space:pre-line;animation:slideUp .4s ease-out;box-shadow:0 2px 8px rgba(0,0,0,.04);display:none}
+.jf{padding:1rem 1.5rem 1.5rem;border-top:1px solid #ebe7de;display:flex;justify-content:space-between;align-items:center}
+.jf .n{font-size:.72rem;color:#a09a90}
+.jf button{background:linear-gradient(135deg,#5b7a5e,#3d5940);color:#fff;border:none;padding:.6rem 1.4rem;border-radius:10px;font-size:.82rem;font-family:'Outfit';font-weight:500;cursor:pointer}
+
+/* CTA */
+.cta{background:linear-gradient(135deg,#2d2a24,#3d3830);border:1px solid rgba(255,204,0,.2);border-radius:16px;padding:2rem;text-align:center;margin:1rem 1.5rem 1.5rem}
+.cta h3{font-family:'Playfair Display',serif;font-size:1.2rem;color:#ffcc00;margin-bottom:.5rem;font-weight:400}
+.cta p{font-size:.85rem;color:#a09a90;margin-bottom:1rem;line-height:1.6}
+.cta a{text-decoration:none}
+.ctb{background:#ffcc00;color:#2a3230;border:none;padding:.8rem 2rem;border-radius:12px;font-size:.9rem;font-family:'Outfit';font-weight:600;cursor:pointer;transition:all .3s;display:inline-block}
+.ctb:hover{background:#e6b800;transform:translateY(-2px);box-shadow:0 8px 24px rgba(255,204,0,.3)}
+.cts{font-size:.72rem;color:#6b6560;margin-top:.8rem}.cts a{color:#cdaa6b;text-decoration:none}.cts a:hover{color:#ffcc00}
+</style>
+</head>
+<body>
+
+<nav class="sn"><div class="sb">🌿 Serenity Massage</div><div class="sl"><span>Behandlungen</span><span>Über uns</span><span>Kontakt</span></div></nav>
+
+<div class="hero"><div class="hg"></div><div class="ht">Wellness & Entspannung in Neckarsulm</div><h1>Finde deine <em>innere Ruhe</em></h1><p>Professionelle Massagen in entspannter Atmosphäre. Buche deinen Termin in Sekunden — rund um die Uhr.</p><button class="hb" onclick="openChat()">💬 Jetzt Termin buchen</button></div>
+
+<div class="ss"><h2>Unsere Behandlungen</h2><div class="sg">
+<div class="sc"><div style="font-size:1.8rem;margin-bottom:.6rem">💆</div><div style="font-weight:600;font-size:.95rem">Klassische Massage</div><div style="color:#8a847a;font-size:.82rem;margin-top:4px">Ganzkörper-Entspannung für Körper und Geist</div><div style="display:flex;justify-content:space-between;margin-top:1rem;align-items:center"><span style="color:#8a847a;font-size:.78rem">30 / 60 Min</span><span style="color:#5b7a5e;font-weight:600">ab 45€</span></div></div>
+<div class="sc"><div style="font-size:1.8rem;margin-bottom:.6rem">🪨</div><div style="font-weight:600;font-size:.95rem">Hot Stone Massage</div><div style="color:#8a847a;font-size:.82rem;margin-top:4px">Warme Basaltsteine lösen tiefe Verspannungen</div><div style="display:flex;justify-content:space-between;margin-top:1rem;align-items:center"><span style="color:#8a847a;font-size:.78rem">60 Min</span><span style="color:#5b7a5e;font-weight:600">89€</span></div></div>
+<div class="sc"><div style="font-size:1.8rem;margin-bottom:.6rem">🌸</div><div style="font-weight:600;font-size:.95rem">Aromatherapie Massage</div><div style="color:#8a847a;font-size:.82rem;margin-top:4px">Ätherische Öle für ganzheitliche Entspannung</div><div style="display:flex;justify-content:space-between;margin-top:1rem;align-items:center"><span style="color:#8a847a;font-size:.78rem">45 Min</span><span style="color:#5b7a5e;font-weight:600">65€</span></div></div>
+<div class="sc"><div style="font-size:1.8rem;margin-bottom:.6rem">💪</div><div style="font-weight:600;font-size:.95rem">Sport Massage</div><div style="color:#8a847a;font-size:.82rem;margin-top:4px">Regeneration und Leistungssteigerung</div><div style="display:flex;justify-content:space-between;margin-top:1rem;align-items:center"><span style="color:#8a847a;font-size:.78rem">45 Min</span><span style="color:#5b7a5e;font-weight:600">69€</span></div></div>
+<div class="sc"><div style="font-size:1.8rem;margin-bottom:.6rem">🎯</div><div style="font-weight:600;font-size:.95rem">Rücken & Nacken Spezial</div><div style="color:#8a847a;font-size:.82rem;margin-top:4px">Fokus auf die häufigsten Problemzonen</div><div style="display:flex;justify-content:space-between;margin-top:1rem;align-items:center"><span style="color:#8a847a;font-size:.78rem">30 Min</span><span style="color:#5b7a5e;font-weight:600">49€</span></div></div>
+</div></div>
+
+<div class="ct"><h2>Besuche uns</h2>📍 Musterstraße 12, 71154 Neckarsulm<br>🕐 Mo–Fr 9–20 Uhr, Sa 9–16 Uhr<br>📞 +49 7132 1234567</div>
+<div class="ft">© 2026 Serenity Massage · Powered by <strong>Bookly AI</strong></div>
+
+<button class="cb" id="bubble" onclick="openChat()"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg><span class="bd">1</span></button>
+
+<div class="cw" id="cw">
+  <div class="ch"><div class="ca">🌿</div><div class="ci"><div class="cn">Serenity Massage</div><div class="cs"><span class="cd"></span>Online — antwortet sofort</div></div><button class="cx" onclick="closeChat()">✕</button></div>
+  <div class="cbd" id="cbd"></div>
+  <div class="ib" id="ib"><input class="ii" id="inp" placeholder="" onkeydown="if(event.key==='Enter')sub()"><button class="is" onclick="sub()">↑</button></div>
+  <div class="pw">⚡ Powered by <strong>Bookly AI</strong></div>
+</div>
+
+<div class="jo" id="jo">
+  <div class="jb">
+    <div class="jh"><div><div class="jt">Automatisierte Kunden-Journey</div><h2 class="jti">Was der Kunde erlebt</h2></div><button class="jx" onclick="cj()">✕</button></div>
+    <div style="padding:1.5rem" id="jst"></div>
+    <div class="jf"><div class="n">Alles automatisch — kein manueller Aufwand</div><button onclick="cj()">Verstanden</button></div>
+    <div class="cta"><h3>Das war Bookly AI in Aktion</h3><p>Online Buchung → Bestätigung → Erinnerungen → Google Bewertung.<br>Alles automatisch. Alles KI gestützt.</p><a href="https://digitalstrides.de/#kontakt" target="_blank"><button class="ctb">Kostenlose Analyse anfragen</button></a><div class="cts">Powered by <a href="https://digitalstrides.de" target="_blank">DigitalStrides</a></div></div>
+  </div>
+</div>
+
+<script>
+const S={name:"Serenity Massage",addr:"Musterstraße 12, 71154 Neckarsulm",ph:"+49 7132 1234567",rev:"https://g.page/r/serenity-massage/review"};
+const SV=[
+{id:"c30",n:"Klassische Massage",d:30,p:45,e:"💆",ds:"Ganzkörper-Entspannung"},
+{id:"c60",n:"Klassische Massage",d:60,p:75,e:"💆",ds:"Intensive Ganzkörperbehandlung"},
+{id:"hs",n:"Hot Stone Massage",d:60,p:89,e:"🪨",ds:"Warme Basaltsteine lösen Verspannungen"},
+{id:"ar",n:"Aromatherapie Massage",d:45,p:65,e:"🌸",ds:"Ätherische Öle für Körper & Geist"},
+{id:"sp",n:"Sport Massage",d:45,p:69,e:"💪",ds:"Regeneration nach dem Training"},
+{id:"bk",n:"Rücken & Nacken Spezial",d:30,p:49,e:"🎯",ds:"Fokus auf Problemzonen"},
+];
+const FQ={
+parken:{q:"🅿️ Parken",a:"Kostenlose Parkplätze direkt vor dem Salon. Einfahrt über die Seitenstraße."},
+preise:{q:"💰 Preise",a:"Unsere Massagen starten bei 45€ (30 Min). Möchtest du die Behandlungen sehen?"},
+adresse:{q:"📍 Anfahrt",a:S.addr+" — direkt neben der Apotheke am Marktplatz."},
+zeiten:{q:"🕐 Öffnungszeiten",a:"Mo–Fr 9:00–20:00 Uhr, Sa 9:00–16:00 Uhr. Sonntag geschlossen."},
+gutschein:{q:"🎁 Gutscheine",a:"Gutscheine gibt es ab 45€ — im Salon oder per Post. Perfekt als Geschenk!"},
+storno:{q:"❌ Stornierung",a:"Termine können bis 24h vorher kostenfrei storniert werden. Einfach hier im Chat oder telefonisch."},
+};
+let st={step:"init",svc:null,dt:null,sl:null,nm:"",em:"",ph:"",code:"",dtl:""};
+const bd=()=>document.getElementById("cbd");
+const tm=()=>{const d=new Date();return`${String(d.getHours()).padStart(2,"0")}:${String(d.getMinutes()).padStart(2,"0")}`};
+function aB(t){bd().innerHTML+=`<div class="m mb"><div class="mx">${t}</div><div class="mt">${tm()}</div></div>`;sc()}
+function aU(t){bd().innerHTML+=`<div class="m mu"><div class="mx">${t}</div><div class="mt">${tm()}</div></div>`;sc()}
+function sT(){bd().innerHTML+=`<div class="tp" id="tp"><div class="td"></div><div class="td"></div><div class="td"></div></div>`;sc()}
+function hT(){const e=document.getElementById("tp");if(e)e.remove()}
+function cA(){document.querySelectorAll(".ca2").forEach(e=>e.remove())}
+function sc(){setTimeout(()=>{const b=bd();b.scrollTop=b.scrollHeight},50)}
+function sI(p){const b=document.getElementById("ib"),i=document.getElementById("inp");b.style.display="flex";i.placeholder=p;i.value="";setTimeout(()=>i.focus(),100)}
+function hI(){document.getElementById("ib").style.display="none"}
+function aA(h){bd().innerHTML+=`<div class="ac ca2">${h}</div>`;sc()}
+
+function openChat(){document.getElementById("bubble").style.display="none";const w=document.getElementById("cw");w.style.display="flex";if(st.step==="init"){st.step="menu";setTimeout(()=>{aB(`Willkommen bei ${S.name}! 🌿\n\nIch bin rund um die Uhr für dich da und helfe dir bei allem rund um deinen Besuch.\n\nWas möchtest du tun?`);sM()},500)}}
+function closeChat(){document.getElementById("cw").style.display="none";document.getElementById("bubble").style.display="flex"}
+
+function sM(){aA(`<button class="pl pp" onclick="hM('book')">📅 Termin buchen</button><button class="pl ps" onclick="hM('cancel')">❌ Stornieren</button><button class="pl ps" onclick="hM('faq')">❓ Frage stellen</button>`)}
+function hM(c){cA();hI();if(c==="book"){aU("Termin buchen");setTimeout(()=>{aB("Welche Massage darf es sein?");sSv()},400)}else if(c==="faq"){aU("Ich habe eine Frage");setTimeout(()=>{aB("Was möchtest du wissen?");sFq()},400)}else if(c==="cancel"){aU("Termin stornieren");setTimeout(()=>{aB("Bitte nenne mir deinen Buchungscode (z.B. SR-A1B2C) oder deinen Namen:");st.step="cancel_input";sI("Buchungscode oder Name...")},400)}}
+
+function sSv(){let h='<div style="display:flex;flex-direction:column;gap:6px;width:100%">';SV.forEach(s=>{h+=`<button class="sv" onclick="xS('${s.id}')"><div class="vl"><span class="ve">${s.e}</span><div><div class="vn">${s.n}</div><div class="vd">${s.d} Min · ${s.ds}</div></div></div><span class="vp">${s.p}€</span></button>`});h+='</div>';aA(h)}
+function xS(id){cA();const s=SV.find(x=>x.id===id);st.svc=s;aU(`${s.e} ${s.n} (${s.d} Min) — ${s.p}€`);setTimeout(()=>{sT();setTimeout(()=>{hT();aB(`Hier sind die freien Termine für ${s.n} (${s.d} Min):`);xSl()},1200)},400)}
+
+function xSl(){const dy=["So","Mo","Di","Mi","Do","Fr","Sa"],mo=["Jan","Feb","Mär","Apr","Mai","Jun","Jul","Aug","Sep","Okt","Nov","Dez"];const td=new Date();let h='<div style="display:flex;flex-direction:column;gap:14px;width:100%">';for(let i=1;i<=4;i++){const d=new Date();d.setDate(td.getDate()+i);if(d.getDay()===0)continue;const iso=d.toISOString(),pf=i===1?"Morgen, ":"",lb=`${pf}${dy[d.getDay()]} ${d.getDate()}. ${mo[d.getMonth()]}`;const sl=d.getDay()===6?["09:00","10:00","11:00","13:00","14:30"]:["09:00","10:30","12:00","14:00","15:30","17:00","18:30"];h+=`<div><div class="dl">${lb}</div><div class="sr">`;sl.forEach(s=>{h+=`<button class="sb2" onclick="xT('${iso}','${s}','${lb}')">${s}</button>`});h+='</div></div>'}h+='</div>';aA(h)}
+
+function xT(iso,sl,lb){cA();st.dt=iso;st.sl=sl;st.dtl=lb;aU(`${lb} um ${sl} Uhr`);setTimeout(()=>{aB("Wie heißt du? 😊");st.step="name";sI("Dein Name...")},400)}
+
+function sub(){const i=document.getElementById("inp"),v=i.value.trim();if(!v)return;i.value="";aU(v);
+if(st.step==="name"){st.nm=v;setTimeout(()=>{aB(`Danke ${v}! Deine E-Mail-Adresse bitte:`);st.step="email";sI("deine@email.de")},400)}
+else if(st.step==="email"){if(!v.includes("@")){aB("Das sieht nicht nach einer gültigen E-Mail aus. Bitte nochmal:");return}st.em=v;setTimeout(()=>{aB("Und deine Handynummer für die SMS-Erinnerung:");st.step="phone";sI("+49 170 ...")},400)}
+else if(st.step==="phone"){st.ph=v;hI();setTimeout(()=>{aB(`Perfekt! Hier deine Zusammenfassung:\n\n🧖 ${st.svc.n} (${st.svc.d} Min)\n📅 ${st.dtl} um ${st.sl} Uhr\n💰 ${st.svc.p}€\n👤 ${st.nm}\n📧 ${st.em}\n📱 ${v}\n\nSoll ich verbindlich buchen?`);st.step="confirm";aA(`<button class="pl pp" onclick="xC(true)">✅ Verbindlich buchen</button><button class="pl ps" onclick="xC(false)">✏️ Ändern</button>`)},400)}
+else if(st.step==="cancel_input"){hI();sT();setTimeout(()=>{hT();aB(`Ich habe nach "${v}" gesucht.\n\n📋 Klassische Massage 60 Min\n📅 Morgen um 14:00 Uhr\n\nSoll ich diesen Termin stornieren?`);st.step="cancel_confirm";aA(`<button class="pl ps" onclick="xK(true)">❌ Ja, stornieren</button><button class="pl pp" onclick="xK(false)">👍 Nein, behalten</button>`)},800)}}
+
+function xC(y){cA();if(y){aU("Ja, bitte buchen! ✅");sT();st.code="SR-"+Date.now().toString(36).toUpperCase().slice(-5);setTimeout(()=>{hT();aB(`Dein Termin ist gebucht! ✅\n\n📋 Buchungscode: ${st.code}\n\nDas passiert jetzt automatisch:\n✉️ Bestätigung per E-Mail\n📱 SMS-Erinnerung 24h vorher\n📱 SMS-Erinnerung 2h vorher\n⭐ Google Bewertungsanfrage nach dem Termin\n\nBei Verhinderung kannst du hier im Chat stornieren.\nWir freuen uns auf dich! 🌿`);st.step="done";aA(`<button class="pl pp" onclick="sJ()">👁️ Kunden-Journey ansehen</button><button class="pl ps" onclick="rC()">🔄 Neue Anfrage</button>`)},1500)}else{aU("Nein, ich möchte ändern");setTimeout(()=>{aB("Kein Problem! Lass uns von vorne starten.");st={step:"menu",svc:null,dt:null,sl:null,nm:"",em:"",ph:"",code:"",dtl:""};sM()},400)}}
+
+function xK(y){cA();if(y){aU("Ja, bitte stornieren");sT();setTimeout(()=>{hT();aB("Dein Termin wurde storniert. ✅\n\nDu erhältst eine Bestätigung per E-Mail.\nMöchtest du direkt neu buchen?");st.step="menu";sM()},800)}else{aU("Nein, Termin behalten");setTimeout(()=>{aB("Alles klar, dein Termin bleibt bestehen! 👍");st.step="menu";sM()},400)}}
+
+function sFq(){let h='<div style="display:flex;gap:6px;flex-wrap:wrap">';Object.entries(FQ).forEach(([k,v])=>{h+=`<button class="pl ps pm" onclick="xF('${k}')">${v.q}</button>`});h+='</div>';aA(h)}
+function xF(k){cA();aU(FQ[k].q);setTimeout(()=>{aB(FQ[k].a);setTimeout(()=>{aB("Kann ich dir noch etwas anderes helfen?");st.step="menu";sM()},700)},400)}
+function rC(){cA();hI();st={step:"menu",svc:null,dt:null,sl:null,nm:"",em:"",ph:"",code:"",dtl:""};setTimeout(()=>{aB("Was kann ich noch für dich tun?");sM()},300)}
+
+// JOURNEY
+function sJ(){cA();document.getElementById("jo").style.display="flex";const c=document.getElementById("jst");
+const nm=st.nm||"Kunde",sl=st.sl||"14:00",co=st.code||"SR-DEMO1",sv=st.svc?.n||"Massage";
+const steps=[
+{i:"✅",t:"Buchungsbestätigung",tm:"⏱️ Sofort",ch:"E-Mail + SMS",p:`Hallo ${nm},\n\ndein Termin bei ${S.name} ist bestätigt!\n\n🧖 ${sv}\n📅 ${sl} Uhr\n📍 ${S.addr}\n\nBuchungscode: ${co}\n\nZum Stornieren antworte STORNO.`},
+{i:"📱",t:"Erinnerung (24h vorher)",tm:"⏱️ 24 Stunden vorher",ch:"SMS",p:`Erinnerung: Morgen um ${sl} Uhr ist dein Termin bei ${S.name}.\n\n📍 ${S.addr}\n🅿️ Kostenlose Parkplätze vor dem Salon.\n\nAntwort STORNO zum Stornieren.`},
+{i:"⏰",t:"Erinnerung (2h vorher)",tm:"⏱️ 2 Stunden vorher",ch:"SMS",p:`In 2 Stunden ist dein Termin! 🌿\n\n${S.name}\n${S.addr}\n\nWir freuen uns auf dich!`},
+{i:"⭐",t:"Google Bewertungsanfrage",tm:"⏱️ 2 Stunden nach Termin",ch:"SMS + E-Mail",p:`Hallo ${nm},\n\nvielen Dank für deinen Besuch bei ${S.name}! 🌿\n\nWie war deine Erfahrung? Wir freuen uns über deine ehrliche Bewertung:\n\n⭐ ${S.rev}\n\nDein nächster Termin ist nur einen Klick entfernt!\n\n💆 Direkt wieder buchen:\nserenity-massage.de/buchen`},
+];
+let h='';steps.forEach((s,i)=>{const l=i<steps.length-1;h+=`<div class="js off" id="j${i}"><div class="jr"><div class="jdc"><div class="jd off" id="jd${i}">${s.i}</div>${l?`<div class="jl off" id="jl${i}"></div>`:''}</div><div class="jc"><div class="jch"><span class="jcti">${s.t}</span><span class="jcc">${s.ch}</span></div><div class="jtm">${s.tm}</div><div class="jp" id="jp${i}">${s.p}</div></div></div></div>`});
+c.innerHTML=h;
+[400,1600,3000,4400].forEach((dl,i)=>{setTimeout(()=>{const s=document.getElementById("j"+i),d=document.getElementById("jd"+i),p=document.getElementById("jp"+i);if(s){s.classList.remove("off");s.classList.add("on")}if(d){d.classList.remove("off");d.classList.add("on")}if(p)p.style.display="block";if(i>0){const l=document.getElementById("jl"+(i-1));if(l){l.classList.remove("off");l.classList.add("on")}}},dl)})}
+function cj(){document.getElementById("jo").style.display="none"}
+</script>
+</body>
+</html>
