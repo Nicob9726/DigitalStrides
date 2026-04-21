@@ -8,3 +8,4 @@ services:
     environment:
       - SMTP_USER=${SMTP_USER}
       - SMTP_PASS=${SMTP_PASS}
+      - GROQ_API_KEY=${GROQ_API_KEY}
