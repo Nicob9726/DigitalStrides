@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Chakra_Petch, IBM_Plex_Mono } from 'next/font/google'
 import './globals.css'
+import ChatWidget from '@/components/ChatWidget'
 
 const chakra = Chakra_Petch({
   subsets: ['latin'],
@@ -98,7 +99,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className="font-mono" style={{ backgroundColor: '#000000', color: '#E4E4E7' }}>{children}</body>
+      <body className="font-mono" style={{ backgroundColor: '#000000', color: '#E4E4E7' }}>
+        {children}
+        <ChatWidget />
+      </body>
     </html>
   )
 }
